@@ -6,25 +6,11 @@ import java.util.HashSet;
 public class Ib_3 {
     public static void main(String[] args) {
         printAlphabets();
-        
+
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
 
-        StringBuilder resultAlphabet = new StringBuilder();
-        Set<Character> charSet = new HashSet<>();
-
-        for (int i = 0; i < userInput.length(); i++) {
-            char currentSymbol = userInput.charAt(i);
-            if (charSet.contains(currentSymbol)) continue;
-            String alphabet = generateSymbol(currentSymbol);
-            resultAlphabet.append(alphabet);
-            charSet.add(currentSymbol);
-        }
-
-        if (resultAlphabet.isEmpty()){
-            System.out.println("\nОшибка: не обнаружен ни один алфавит. Перезапустите программу и ведите корректные значения.");
-            System.exit(0);
-        }
+        String resultAlphabet = generateAlphabet(userInput);
 
         System.out.println("\nКонечный алфавит: " + resultAlphabet);
 
@@ -51,7 +37,26 @@ public class Ib_3 {
 
     }
 
-    private static String generateSymbol(char number) {
+    private static String generateAlphabet(String userInput) {
+        StringBuilder resultAlphabet = new StringBuilder();
+        Set<Character> charSet = new HashSet<>();
+
+        for (int i = 0; i < userInput.length(); i++) {
+            char currentSymbol = userInput.charAt(i);
+            if (charSet.contains(currentSymbol)) continue;
+            String alphabet = generateSymbols(currentSymbol);
+            resultAlphabet.append(alphabet);
+            charSet.add(currentSymbol);
+        }
+
+        if (resultAlphabet.isEmpty()){
+            System.out.println("\nОшибка: не обнаружен ни один алфавит. Перезапустите программу и ведите корректные значения.");
+            System.exit(0);
+        }
+        return resultAlphabet.toString();
+    }
+
+    private static String generateSymbols(char number) {
         return switch (number) {
             case '1' -> "abcdefghijklmnopqrstuvwxyz";
             case '2' -> "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
