@@ -1,19 +1,24 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Ib_3 {
     public static void main(String[] args) {
         printAlphabets();
-
+        
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
 
         StringBuilder resultAlphabet = new StringBuilder();
+        Set<Character> charSet = new HashSet<>();
 
         for (int i = 0; i < userInput.length(); i++) {
-            String str = generateSymbol(userInput.charAt(i));
-            resultAlphabet.append(str);
-            userInput = userInput.replaceAll(String.valueOf(userInput.charAt(i)), "");
+            char currentSymbol = userInput.charAt(i);
+            if (charSet.contains(currentSymbol)) continue;
+            String alphabet = generateSymbol(currentSymbol);
+            resultAlphabet.append(alphabet);
+            charSet.add(currentSymbol);
         }
 
         if (resultAlphabet.isEmpty()){
